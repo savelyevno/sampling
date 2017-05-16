@@ -9,9 +9,9 @@
 
 struct SparseRecoveryBase
 {
-    void update(Int index, Int value);
+    virtual void update(Int index, Int value){}
 
-    set <pair <Int, Int> > query();
+    virtual Set <pair <Int, Int> > query(){};
 };
 
 

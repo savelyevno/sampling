@@ -4,16 +4,11 @@
 
 #include "OneSparseRecoveryCormode.h"
 
-OneSparseRecoveryCormode::OneSparseRecoveryCormode(Random *_random,
-                                                   PrimeGetter *_prime_getter,
-                                                   Int _n,
-                                                   double failure_probability)
+OneSparseRecoveryCormode::OneSparseRecoveryCormode(Int _p,
+                                                   Int _z)
 {
-    random = _random;
-    prime_getter = _prime_getter;
-
-    p = prime_getter->get_next_prime(Int(_n/failure_probability));
-    z = random->randint(1, p);
+    p = _p;
+    z = _z;
 
     phi = tau = iota = 0;
 }

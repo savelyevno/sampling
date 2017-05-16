@@ -61,7 +61,7 @@ Int PrimeGetter::get_next_prime(Int n)
         return cache[n];
 
     Int p = n;
-    if (p & 0)
+    if (p % 2 == 0)
         p++;
 
     while (!is_prime(p))

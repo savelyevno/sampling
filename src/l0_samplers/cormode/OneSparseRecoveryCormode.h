@@ -14,13 +14,9 @@
 struct OneSparseRecoveryCormode : OneSparseRecoveryBase
 {
     Int p, z, iota, phi, tau;
-    Random *random;
-    PrimeGetter *prime_getter;
 
-    OneSparseRecoveryCormode(Random *_random,
-                             PrimeGetter *_prime_getter,
-                             Int _n,
-                             double failure_probability);
+    OneSparseRecoveryCormode(Int _p,
+                             Int _z);
 
     void update(Int index, Int value);
 

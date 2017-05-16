@@ -13,12 +13,30 @@ using namespace std;
 #include <map>
 #include <unordered_map>
 #include <assert.h>
+#include <vector>
+#include <cmath>
 
 typedef long long ll;
 typedef ll Int;
 
 #define Set set
+#define Vector vector
+#define Map unordered_map
 //typedef unordered_set Set;
+
+
+
+namespace std {
+    template <>
+    class hash<pair <Int, Int> >{
+    public :
+        size_t operator()(const pair<Int, Int> &name ) const
+        {
+            return (hash<Int>()(name.first) << 1) ^ hash<Int>()(name.second);
+        }
+    };
+};
+
 
 
 
