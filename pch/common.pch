@@ -1,0 +1,25 @@
+//
+// Created by nikita on 15.05.17.
+//
+
+#ifndef L0SAMPLER_COMMON_H
+#define L0SAMPLER_COMMON_H
+
+using namespace std;
+
+#include <algorithm>
+#include <set>
+#include <unordered_set>
+#include <map>
+#include <unordered_map>
+#include <assert.h>
+
+typedef long long ll;
+typedef ll Int;
+
+#define Set set
+//typedef unordered_set Set;
+
+
+
+#endif //L0SAMPLER_COMMON_H
