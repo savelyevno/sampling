@@ -19,9 +19,9 @@ XorShiftPlusRandom::XorShiftPlusRandom(uint64_t init_state[2])
     }
 }
 
-void XorShiftPlusRandom::seed(Int seed)
+void XorShiftPlusRandom::seed(Int _seed)
 {
-    state[0] = state[1] = uint64_t(seed);
+    state[0] = state[1] = uint64_t(_seed);
 }
 
 Int XorShiftPlusRandom::getrandbits()
@@ -36,5 +36,16 @@ Int XorShiftPlusRandom::getrandbits()
 
 Int XorShiftPlusRandom::randint(Int a, Int b)
 {
-    return a + (getrandbits() % b);
+    return a + (uInt(getrandbits()) % b);
+}
+
+XorShiftPlusRandom::XorShiftPlusRandom(Int _seed)
+{
+    seed(_seed);
+}
+
+XorShiftPlusRandom::XorShiftPlusRandom()
+{
+    random_device rd;
+    state[0] = state[1] = uint64_t(rd());
 }

@@ -7,11 +7,11 @@
 
 #include "../../../pch/common.pch"
 
-class L0SamplerBase
+struct L0SamplerBase
 {
-    void update(Int index, Int value);
+    virtual void update(Int index, Int value)=0;
 
-    pair<Int, Int> query();
+    virtual Set < pair<Int, Int> > query()=0;
 };
 
 

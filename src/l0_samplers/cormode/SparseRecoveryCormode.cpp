@@ -48,7 +48,11 @@ Set <pair<Int, Int>> SparseRecoveryCormode::query()
 {
     Set <pair <Int, Int> > result;
     for (auto one_sparse_recoverer: one_sparse_recoverers)
-        result.insert(one_sparse_recoverer.second->query());
+    {
+        auto query_result = one_sparse_recoverer.second->query();
+        if (query_result.first >= 0)
+            result.insert(query_result);
+    }
 
     return result;
 }

@@ -15,9 +15,11 @@ using namespace std;
 #include <assert.h>
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 typedef long long ll;
 typedef ll Int;
+typedef unsigned long long uInt;
 
 #define Set set
 #define Vector vector

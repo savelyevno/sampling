@@ -19,11 +19,11 @@ struct HashBase
 
     HashBase(PrimeGetter* prime_getter, Random* _random, int degree, Int _domain_size, Int _image_size);
 
-    Int create_hash_function();
+    virtual Int create_hash_function()=0;
 
-    Int eval_hash_function(Int id, Int arg);
+    virtual Int eval_hash_function(Int id, Int arg)=0;
 
-    Int* eval_hash_function_at_several_points(Int id, Int* arg);
+    virtual Int* eval_hash_function_at_several_points(Int id, Int* arg)=0;
 };
 
 

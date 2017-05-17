@@ -9,11 +9,11 @@
 
 struct RandomBase
 {
-    void seed(Int seed);
+    virtual void seed(Int seed)=0;
 
-    Int getrandbits();
+    virtual Int getrandbits()=0;
 
-    Int randint(Int a, Int b);
+    virtual Int randint(Int a, Int b)=0;
 };
 
 

@@ -33,3 +33,8 @@ Int RegularHash::eval_hash_function(Int id, Int arg)
 
     return result % image_size;
 }
+
+Int *RegularHash::eval_hash_function_at_several_points(Int id, Int *arg)
+{
+    return nullptr;
+}

@@ -7,11 +7,14 @@
 
 #include "RandomBase.h"
 #include <random>
+#include <random>
 
 struct XorShiftPlusRandom : public RandomBase
 {
     uint64_t state[2];
     XorShiftPlusRandom(uint64_t init_state[2]);
+    XorShiftPlusRandom(Int seed);
+    XorShiftPlusRandom();
 
     void seed(Int seed);
 

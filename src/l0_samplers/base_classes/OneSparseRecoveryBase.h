@@ -9,9 +9,9 @@
 
 struct OneSparseRecoveryBase
 {
-    virtual void update(Int index, Int value){}
+    virtual void update(Int index, Int value)=0;
 
-    virtual pair<Int, Int> query(){}
+    virtual pair<Int, Int> query()=0;
 };
 
 
