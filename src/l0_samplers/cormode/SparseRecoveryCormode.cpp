@@ -27,6 +27,7 @@ SparseRecoveryCormode::SparseRecoveryCormode(Random *_random,
     z_generator->create_hash_function();
 }
 
+
 void SparseRecoveryCormode::update(Int index, Int value)
 {
     for (int row = 0; row < rows; row++)
@@ -43,6 +44,7 @@ void SparseRecoveryCormode::update(Int index, Int value)
         one_sparse_recoverers[{row, hash_value}]->update(index, value);
     }
 }
+
 
 Set <pair<Int, Int>> SparseRecoveryCormode::query()
 {

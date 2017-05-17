@@ -27,9 +27,9 @@ Int RegularHash::eval_hash_function(Int id, Int arg)
 {
     Int result = 0;
 
-
     for (Int i = degree - 1; i >= 0; i--)
-        result = ((result * arg + coefficients[id][i]) % field_order);
+        result = (result * arg + coefficients[id][i]) % field_order;
+//        result = ((((result * arg) % field_order) + coefficients[id][i]) % field_order);
 
     return result % image_size;
 }

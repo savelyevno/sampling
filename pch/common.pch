@@ -21,11 +21,13 @@ typedef long long ll;
 typedef ll Int;
 typedef unsigned long long uInt;
 
-#define Set set
-#define Vector vector
-#define Map unordered_map
-//typedef unordered_set Set;
+//#define Set set
+#define Set unordered_set
 
+#define Vector vector
+
+#define Map unordered_map
+//#define Map map
 
 
 namespace std {

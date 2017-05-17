@@ -12,18 +12,18 @@
 
 struct L0SamplerCormode : L0SamplerBase
 {
-    Int n, levels, k, hash_level_domain_size;
+    Int n, levels, k;
     Hash* level_hash;
     SparseRecovery** sparse_recoverers;
+    Hash* tmp_hash;
+    vector <int> cnt_lvl;
 
     L0SamplerCormode(
             PrimeGetter* _prime_getter,
             Int _n,
-            double eps,
             double delta,
             double sp_rec_delta,
             double _one_sp_rec_err_prob,
-            double _hash_level_n_power,
             Int _k,
             Int init_seed
     );

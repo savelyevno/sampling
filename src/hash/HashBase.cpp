@@ -13,5 +13,5 @@ HashBase::HashBase(PrimeGetter* prime_getter, Random* _random, int _degree, Int 
     degree = _degree;
     random = _random;
 
-    field_order = prime_getter->get_next_prime(domain_size + 1);
+    field_order = prime_getter->get_next_prime(max(domain_size + 1, image_size));
 }
