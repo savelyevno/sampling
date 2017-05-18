@@ -10,17 +10,34 @@
 #include "../../random/Random.h"
 #include "../../primes/PrimeGetter.h"
 
-
 struct OneSparseRecoveryCormode : OneSparseRecoveryBase
 {
     Int p, z, iota, phi, tau;
 
     OneSparseRecoveryCormode(Int _p,
-                             Int _z);
+                             Int _z)
+    {
+        p = _p;
+        z = _z;
 
-    void update(Int index, Int value);
+        phi = tau = iota = 0;
+    }
 
-    pair<Int, Int> query();
+    void update(Int index, Int value)
+    {
+        iota += (index + 1)*value;
+        phi += value;
+        tau = (tau + value * pow(z, index + 1, p)) % p;
+    }
+
+    pair<Int, Int> query()
+    {
+        if (phi != 0 && iota % phi == 0 && iota/phi > 0 &&
+            (tau = phi*pow(z, iota, p)) % p)
+            return {iota/phi - 1, phi};
+        return {-1, -1};
+    }
+
 };
 
 

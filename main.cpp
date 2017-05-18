@@ -1,21 +1,23 @@
 #include <iostream>
 
 #include "experiments/Cormode.h"
-#include "src/timer/Timer.h"
+#include "src/l0_samplers/cormode/SparseRecoveryCormode.h"
+#include "src/l0_samplers/cormode/OneSparseRecoveryCormode.h"
 
 int main()
 {
     start_timer();
 
-//    test_sparse_recovery(
-//            int(1e6),//N
+//    test_sparse_recovery<SparseRecoveryCormode<OneSparseRecoveryCormode>>(
+//            Int(1e6),//N
 //            1000,//s
 //            1e-3,//delta
 //            10000,//N
-//            int(1e9)//MAX
+//            Int(1e9)//MAX
 //    );
 
-    test_l0_sampler_recovery(
+
+    test_l0_sampler_recovery<SparseRecoveryCormode<OneSparseRecoveryCormode>>(
             int(1e7), //n
             1e-2,//delta
             1e-2,//sparse recovery delta

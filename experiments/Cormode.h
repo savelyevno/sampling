@@ -8,7 +8,9 @@
 #include "../src/l0_samplers/cormode/L0SamplerCormode.h"
 #include "../src/timer/Timer.h"
 
-void test_sparse_recovery(Int n, Int s, double delta, int N, int MAXVAL)
+
+template <class SpRecClass>
+void test_sparse_recovery(Int n, Int s, double delta, Int N, Int MAXVAL)
 {
     Int seed = 1;
     Random* prime_getter_random = new Random(seed);
@@ -16,7 +18,7 @@ void test_sparse_recovery(Int n, Int s, double delta, int N, int MAXVAL)
 
     Random* sp_rec_random = new Random(seed);
 
-    SparseRecovery* sp_rec = new SparseRecovery(
+    SpRecClass* sp_rec = new SpRecClass(
             sp_rec_random,
             prime_getter,
             n,
@@ -44,6 +46,7 @@ void test_sparse_recovery(Int n, Int s, double delta, int N, int MAXVAL)
 }
 
 
+template <class SpRecClass>
 void test_l0_sampler_recovery(
         Int n,
         double delta,
@@ -71,7 +74,7 @@ void test_l0_sampler_recovery(
         unique.insert(updates[i].first);
     }
 
-    L0SamplerCormode* l0_sampler = new L0SamplerCormode(
+    L0SamplerCormode<SpRecClass>* l0_sampler = new L0SamplerCormode<SpRecClass>(
             prime_getter,
             n,
             delta,
