@@ -20,6 +20,9 @@ Int RegularHash::create_hash_function()
             new_coefficients[i] = random->randint(0, field_order);
 
     coefficients.push_back(new_coefficients);
+
+    inc_memory(degree * sizeof(Int));
+
     return Int(coefficients.size()) - 1;
 }
 

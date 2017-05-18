@@ -6,8 +6,9 @@
 #define L0SAMPLER_SPARSERECOVERYBASE_H
 
 #include "../../../pch/common.pch"
+#include "../../base_class/BaseClass.h"
 
-struct SparseRecoveryBase
+struct SparseRecoveryBase : BaseClass
 {
     virtual void update(Int index, Int value)=0;
 

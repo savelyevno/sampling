@@ -9,6 +9,7 @@
 #include "../base_classes/OneSparseRecoveryBase.h"
 #include "../../random/Random.h"
 #include "../../primes/PrimeGetter.h"
+#include "../../base_class/BaseClass.h"
 
 struct OneSparseRecoveryCormode : OneSparseRecoveryBase
 {
@@ -21,6 +22,8 @@ struct OneSparseRecoveryCormode : OneSparseRecoveryBase
         z = _z;
 
         phi = tau = iota = 0;
+
+        inc_memory(sizeof(p) + sizeof(z) + sizeof(phi) + sizeof(tau) + sizeof(iota));
     }
 
     void update(Int index, Int value)

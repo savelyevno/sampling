@@ -9,7 +9,7 @@
 #include "../random/Random.h"
 #include "../Tools.h"
 
-struct PrimeGetter
+struct PrimeGetter : BaseClass
 {
     unordered_map<Int, Int> cache;
     Random *random;

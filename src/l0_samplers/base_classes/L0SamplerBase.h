@@ -6,8 +6,9 @@
 #define L0SAMPLER_L0SAMPLERBASE_H
 
 #include "../../../pch/common.pch"
+#include "../../base_class/BaseClass.h"
 
-struct L0SamplerBase
+struct L0SamplerBase : BaseClass
 {
     virtual void update(Int index, Int value)=0;
 

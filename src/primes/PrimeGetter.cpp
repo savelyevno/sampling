@@ -6,6 +6,8 @@
 
 PrimeGetter::PrimeGetter(Random *_random)
 {
+    inc_memory(sizeof(random));
+
     random = _random;
 }
 

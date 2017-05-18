@@ -6,8 +6,9 @@
 #define L0SAMPLER_RANDOMBASE_H
 
 #include "../../pch/common.pch"
+#include "../base_class/BaseClass.h"
 
-struct RandomBase
+struct RandomBase : BaseClass
 {
     virtual void seed(Int seed)=0;
 

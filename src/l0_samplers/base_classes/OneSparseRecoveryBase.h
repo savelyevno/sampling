@@ -6,8 +6,9 @@
 #define L0SAMPLER_ONESPARSERECOVERYBASE_H
 
 #include "../../../pch/common.pch"
+#include "../../base_class/BaseClass.h"
 
-struct OneSparseRecoveryBase
+struct OneSparseRecoveryBase : BaseClass
 {
     virtual void update(Int index, Int value)=0;
 

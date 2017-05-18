@@ -6,6 +6,8 @@
 
 XorShiftPlusRandom::XorShiftPlusRandom(uint64_t init_state[2])
 {
+    inc_memory(16);
+
     if (init_state[0] == init_state[1] && init_state[0] == 0)
     {
         random_device rd;
@@ -41,11 +43,15 @@ Int XorShiftPlusRandom::randint(Int a, Int b)
 
 XorShiftPlusRandom::XorShiftPlusRandom(Int _seed)
 {
+    inc_memory(16);
+
     seed(_seed);
 }
 
 XorShiftPlusRandom::XorShiftPlusRandom()
 {
+    inc_memory(16);
+
     random_device rd;
     state[0] = state[1] = uint64_t(rd());
 }

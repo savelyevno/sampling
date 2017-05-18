@@ -8,7 +8,6 @@
 #include "../src/l0_samplers/cormode/L0SamplerCormode.h"
 #include "../src/timer/Timer.h"
 
-
 template <class SpRecClass>
 void test_sparse_recovery(Int n, Int s, double delta, Int N, Int MAXVAL)
 {
@@ -46,21 +45,19 @@ void test_sparse_recovery(Int n, Int s, double delta, Int N, Int MAXVAL)
 }
 
 
-template <class SpRecClass>
+template <class L0SamplerClass>
 void test_l0_sampler_recovery(
         Int n,
         double delta,
         double sp_rec_delta,
         double one_sp_rec_err_prob,
         int k,
-        int N,
-        int MAXVAL)
+        Int N,
+        Int MAXVAL)
 {
     Int seed = 1;
     Random* prime_getter_random = new Random(seed);
     PrimeGetter* prime_getter = new PrimeGetter(prime_getter_random);
-
-    Random* sp_rec_random = new Random(seed);
 
     Int gen_seed = 4;
     Random* random = new Random(gen_seed);
@@ -74,7 +71,7 @@ void test_l0_sampler_recovery(
         unique.insert(updates[i].first);
     }
 
-    L0SamplerCormode<SpRecClass>* l0_sampler = new L0SamplerCormode<SpRecClass>(
+    L0SamplerClass* l0_sampler = new L0SamplerClass(
             prime_getter,
             n,
             delta,
@@ -84,22 +81,25 @@ void test_l0_sampler_recovery(
             seed
     );
 
+    cout << "Memory: " << l0_sampler->get_memory()/1e6 << " MB" << endl;
 
     start_timer();
     for (int i = 0; i < N; i++)
         l0_sampler->update(updates[i].first, updates[i].second);
     stop_timer("L0 sampler update time: ");
 
+    cout << "Memory: " << l0_sampler->get_memory()/1e6 << " MB" << endl;
 
     start_timer();
     auto result = l0_sampler->query();
     stop_timer("L0 sampler query time: ");
 
 
-    cout << result.size() << " " << unique.size() << endl;
+    cout << "recovered " << result.size() << " out of " << unique.size() << endl;
 
 //    for (int i = 0; i < l0_sampler->levels; i++)
 //        cout << i << ": " << l0_sampler->cnt_lvl[i] << endl;
+
 }
 
 

@@ -10,7 +10,7 @@
 #include "../primes/PrimeGetter.h"
 #include "../random/Random.h"
 
-struct HashBase
+struct HashBase : BaseClass
 {
     Int hash_function_counter, degree, domain_size, image_size, field_order;
     Vector <Int*> coefficients;

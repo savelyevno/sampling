@@ -10,6 +10,7 @@
 #include "../../random/Random.h"
 #include "../../primes/PrimeGetter.h"
 #include "../../hash/Hash.h"
+#include "../../base_class/BaseClass.h"
 
 
 template <class OneSpRecClass>
@@ -27,6 +28,8 @@ struct SparseRecoveryCormode : SparseRecoveryBase
                           double _delta,
                           double _one_sp_rec_err_prob)
     {
+        inc_memory(sizeof(n) + sizeof(s) + sizeof(columns) + sizeof(rows) + sizeof(one_sp_rec_p));
+
         n = _n;
         s = _s;
 
@@ -38,9 +41,11 @@ struct SparseRecoveryCormode : SparseRecoveryBase
         hash_functions = new Hash(_prime_getter, _random, 2, n, columns);
         for (int row = 0; row < rows; row++)
             hash_functions->create_hash_function();
+        inc_memory(hash_functions->get_memory());
 
         z_generator = new Hash(_prime_getter, _random, 2, columns*rows, one_sp_rec_p);
         z_generator->create_hash_function();
+        inc_memory(z_generator->get_memory());
     }
 
 
@@ -55,6 +60,7 @@ struct SparseRecoveryCormode : SparseRecoveryBase
                         one_sp_rec_p,
                         z_generator->eval_hash_function(0, row*rows + hash_value)
                 );
+                inc_memory(one_sparse_recoverers[{row, hash_value}]->get_memory());
             }
 
             one_sparse_recoverers[{row, hash_value}]->update(index, value);
