@@ -12,7 +12,8 @@
 
 struct HashBase : BaseClass
 {
-    Int hash_function_counter, degree, domain_size, image_size, field_order;
+    Int hash_function_counter, domain_size, image_size, field_order;
+    int degree;
     Vector <Int*> coefficients;
     Random* random;
 
@@ -21,9 +22,9 @@ struct HashBase : BaseClass
 
     virtual Int create_hash_function()=0;
 
-    virtual Int eval_hash_function(Int id, Int arg)=0;
+    virtual Int eval_hash_function(int id, Int arg)=0;
 
-    virtual Int* eval_hash_function_at_several_points(Int id, Int* arg)=0;
+    virtual Int* eval_hash_function_at_several_points(int id, Int* arg)=0;
 };
 
 

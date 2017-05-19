@@ -14,7 +14,8 @@
 template <typename SpRecClass>
 struct L0SamplerCormode : L0SamplerBase
 {
-    Int n, levels, k;
+    int k;
+    Int n, levels;
     Hash* level_hash;
     SpRecClass** sparse_recoverers;
     vector <int> cnt_lvl;
@@ -25,7 +26,7 @@ struct L0SamplerCormode : L0SamplerBase
             double delta,
             double sp_rec_delta,
             double _one_sp_rec_err_prob,
-            Int _k,
+            int _k,
             Int init_seed
     ) : BaseClass()
     {
@@ -39,9 +40,9 @@ struct L0SamplerCormode : L0SamplerBase
 
         n = _n;
 
-        levels = Int(ceil(log2(n))) + 1;
+        levels = Log2(n) + 1;
 
-        Int s = Int(ceil(2*log2(1/delta)));
+        int s = int(ceil(2*log2(1/delta)));
         if (_k == -1)
             k = s/2;
         else
@@ -69,7 +70,9 @@ struct L0SamplerCormode : L0SamplerBase
     void update(Int index, Int value)
     {
         Int hash = level_hash->eval_hash_function(0, index),
-                x = n, level = 0;
+                x = n;
+        int level = 0;
+
         while (x >= hash)
         {
             sparse_recoverers[level]->update(index, value);
@@ -115,7 +118,8 @@ struct L0SamplerCormode : L0SamplerBase
 template <typename SpRecClass>
 struct L0SamplerCormodeModified : L0SamplerBase
 {
-    Int n, levels, k;
+    Int n;
+    int k, levels;
     SpRecClass** sparse_recoverers;
     Hash* level_hash;
     vector <int> cnt_lvl;
@@ -126,8 +130,8 @@ struct L0SamplerCormodeModified : L0SamplerBase
             double delta,
             double sp_rec_delta,
             double _one_sp_rec_err_prob,
-            Int _k,
-            Int init_seed
+            int _k,
+            int init_seed
     )
     {
         inc_memory(sizeof(n) + sizeof(levels) + sizeof(k));
@@ -140,9 +144,9 @@ struct L0SamplerCormodeModified : L0SamplerBase
 
         n = _n;
 
-        levels = Int(ceil(log2(n))) + 1;
+        levels = Log2(n) + 1;
 
-        Int s = Int(ceil(2*log2(1/delta)));
+        int s = int(ceil(2*log2(1/delta)));
         if (_k == -1)
             k = s/2;
         else

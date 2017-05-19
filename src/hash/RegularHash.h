@@ -14,9 +14,9 @@ struct RegularHash : HashBase
 
     Int create_hash_function();
 
-    Int eval_hash_function(Int id, Int arg);
+    Int eval_hash_function(int id, Int arg);
 
-    Int* eval_hash_function_at_several_points(Int id, Int* arg);
+    Int* eval_hash_function_at_several_points(int id, Int* arg);
 };
 
 

@@ -16,7 +16,8 @@
 template <class OneSpRecClass>
 struct SparseRecoveryCormode : SparseRecoveryBase
 {
-    Int n, s, columns, rows, one_sp_rec_p;
+    Int n, columns, rows, one_sp_rec_p;
+    int s;
     Hash* hash_functions;
     Hash* z_generator;
     Map <std::pair<Int, Int>, OneSpRecClass*> one_sparse_recoverers;
@@ -24,7 +25,7 @@ struct SparseRecoveryCormode : SparseRecoveryBase
     SparseRecoveryCormode(Random *_random,
                           PrimeGetter *_prime_getter,
                           Int _n,
-                          Int _s,
+                          int _s,
                           double _delta,
                           double _one_sp_rec_err_prob)
     {
@@ -33,7 +34,7 @@ struct SparseRecoveryCormode : SparseRecoveryBase
         n = _n;
         s = _s;
 
-        one_sp_rec_p = _prime_getter->get_next_prime(Int(n/_one_sp_rec_err_prob));
+        one_sp_rec_p = _prime_getter->get_next_prime(n*Int(1/_one_sp_rec_err_prob));
 
         columns = 2*s;
         rows = Int(log(s/_delta));

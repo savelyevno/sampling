@@ -9,5 +9,14 @@
 
 Int pow(Int a, Int b, Int p);
 
+int Log2(Int x);
+
+#ifdef BOOST
+
+size_t get_first_half(boost::multiprecision::int128_t x);
+
+size_t get_second_half(boost::multiprecision::int128_t x);
+
+#endif
 
 #endif //L0SAMPLER_TOOLS_H

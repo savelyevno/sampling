@@ -13,10 +13,10 @@ struct XorShiftPlusRandom : public RandomBase
 {
     uint64_t state[2];
     XorShiftPlusRandom(uint64_t init_state[2]);
-    XorShiftPlusRandom(Int seed);
+    XorShiftPlusRandom(int seed);
     XorShiftPlusRandom();
 
-    void seed(Int seed);
+    void seed(int seed);
 
     Int getrandbits();
 

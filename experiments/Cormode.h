@@ -9,9 +9,9 @@
 #include "../src/timer/Timer.h"
 
 template <class SpRecClass>
-void test_sparse_recovery(Int n, Int s, double delta, Int N, Int MAXVAL)
+void test_sparse_recovery(Int n, Int s, double delta, int N, Int MAXVAL)
 {
-    Int seed = 1;
+    int seed = 1;
     Random* prime_getter_random = new Random(seed);
     PrimeGetter* prime_getter = new PrimeGetter(prime_getter_random);
 
@@ -52,14 +52,14 @@ void test_l0_sampler_recovery(
         double sp_rec_delta,
         double one_sp_rec_err_prob,
         int k,
-        Int N,
+        int N,
         Int MAXVAL)
 {
-    Int seed = 1;
+    int seed = 1;
     Random* prime_getter_random = new Random(seed);
     PrimeGetter* prime_getter = new PrimeGetter(prime_getter_random);
 
-    Int gen_seed = 4;
+    int gen_seed = 4;
     Random* random = new Random(gen_seed);
     pair <Int, Int>* updates = new pair<Int, Int>[N];
     set <Int> unique;

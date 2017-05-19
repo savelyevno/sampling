@@ -26,18 +26,18 @@ Int RegularHash::create_hash_function()
     return Int(coefficients.size()) - 1;
 }
 
-Int RegularHash::eval_hash_function(Int id, Int arg)
+Int RegularHash::eval_hash_function(int id, Int arg)
 {
     Int result = 0;
 
-    for (Int i = degree - 1; i >= 0; i--)
+    for (int i = degree - 1; i >= 0; i--)
         result = (result * arg + coefficients[id][i]) % field_order;
 //        result = ((((result * arg) % field_order) + coefficients[id][i]) % field_order);
 
     return result % image_size;
 }
 
-Int *RegularHash::eval_hash_function_at_several_points(Int id, Int *arg)
+Int *RegularHash::eval_hash_function_at_several_points(int id, Int *arg)
 {
     return nullptr;
 }

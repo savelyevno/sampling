@@ -4,11 +4,13 @@
 
 #include "Tools.h"
 
-Int pow(ll a, ll b, ll p)
+Int pow(Int a, Int b, Int p)
 {
-    assert(p < (1LL << 32));
+    #ifndef BOOST
+        assert(p < (1LL << 32));
+    #endif
 
-    ll result = 1;
+    Int result = 1;
     while (b > 0)
     {
         if (b & 1)
@@ -18,5 +20,33 @@ Int pow(ll a, ll b, ll p)
         b >>= 1;
     }
 
-    return Int(result);
+    return result;
 }
+
+int Log2(Int x)
+{
+    int result = 0;
+
+    while (x > 0)
+    {
+        x /= 2;
+        result++;
+    }
+
+    return result;
+}
+
+
+#ifdef BOOST
+
+size_t get_first_half(boost::multiprecision::int128_t x)
+{
+    return (x >> 64).convert_to<size_t>();
+}
+
+size_t get_second_half(boost::multiprecision::int128_t x)
+{
+    return ((x << 64) >> 64).convert_to<size_t>();
+}
+
+#endif

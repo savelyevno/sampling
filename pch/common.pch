@@ -17,17 +17,121 @@ using namespace std;
 #include <cmath>
 #include <iostream>
 
+
 typedef long long ll;
-typedef ll Int;
-typedef unsigned long long uInt;
 
-//#define Set set
-#define Set unordered_set
+#define BOOST
 
-#define Vector vector
+#ifdef BOOST
+    #include <boost/multiprecision/cpp_int.hpp>
+    #include <boost/functional/hash.hpp>
+    #include <boost/unordered_map.hpp>
+    #include <boost/unordered_set.hpp>
+    #include <boost/archive/binary_oarchive.hpp>
+    #include <boost/multiprecision/cpp_int.hpp>
+    #include <boost/multiprecision/cpp_int/serialize.hpp>
+    #include <boost/iostreams/device/back_inserter.hpp>
+    #include <boost/iostreams/stream_buffer.hpp>
+    #include <boost/iostreams/stream.hpp>
+    #include <boost/multiprecision/float128.hpp>
+    #include <boost/integer/static_log2.hpp>
 
-#define Map unordered_map
-//#define Map map
+    typedef boost::multiprecision::int128_t Int;
+    typedef boost::multiprecision::uint128_t uInt;
+    typedef boost::multiprecision::float128 Double;
+
+    #define Vector vector
+
+//    #define Set set
+    #define Set boost::unordered_set
+//    #define Set unordered_set
+
+    #define Map boost::unordered_map
+//    #define Map unordered_map
+//    #define Map map
+
+//    namespace mp_hashing {
+//        namespace io = boost::iostreams;
+//
+//        struct hash_sink {
+//            hash_sink(size_t& seed_ref) : _ptr(&seed_ref) {}
+//
+//            typedef char         char_type;
+//            typedef io::sink_tag category;
+//
+//            std::streamsize write(const char* s, std::streamsize n) {
+//                boost::hash_combine(*_ptr, boost::hash_range(s, s+n));
+//                return n;
+//            }
+//        private:
+//            size_t* _ptr;
+//        };
+//
+//        template <typename T> struct hash_impl {
+//            size_t operator()(T const& v) const {
+//                using namespace boost;
+//                size_t seed = 0;
+//                {
+//                    iostreams::stream<hash_sink> os(seed);
+//                    archive::binary_oarchive oa(os, archive::no_header | archive::no_codecvt);
+//                    oa << v;
+//                }
+//                return seed;
+//            }
+//        };
+//    }
+
+//    namespace std {
+//        template <typename backend>
+//        struct hash<boost::multiprecision::number<backend> >
+//                : mp_hashing::hash_impl<boost::multiprecision::number<backend> >
+//        {};
+//    }
+
+//    namespace boost {
+//        template <typename backend>
+//        struct hash<multiprecision::number<backend> >
+//                : mp_hashing::hash_impl<multiprecision::number<backend> >
+//        {};
+//    }
+
+    namespace boost {
+        template <>
+        class hash<Int>{
+        public :
+            size_t operator()(const Int& x) const
+            {
+                return (x >> 64).convert_to<size_t>() ^ ((x << 64) >> 64).convert_to<size_t>();
+            }
+        };
+    }
+
+    namespace std {
+        template <>
+        class hash<Int>{
+        public :
+            size_t operator()(const Int& x) const
+            {
+                return (x >> 64).convert_to<size_t>() ^ ((x << 64) >> 64).convert_to<size_t>();
+            }
+        };
+    }
+
+
+#else
+    typedef ll Int;
+    typedef unsigned long long uInt;
+    typedef double Double;
+
+//    #define Set set
+    #define Set unordered_set
+
+    #define Vector vector
+
+    #define Map unordered_map
+//    #define Map map
+
+#endif
 
 
 namespace std {
@@ -40,6 +144,7 @@ namespace std {
         }
     };
 };
+
 
 
 

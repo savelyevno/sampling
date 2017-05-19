@@ -1,8 +1,10 @@
 #include <iostream>
 
 #include "experiments/Cormode.h"
+#include "experiments/container_test.h"
 #include "src/l0_samplers/cormode/SparseRecoveryCormode.h"
 #include "src/l0_samplers/cormode/OneSparseRecoveryCormode.h"
+
 
 int main()
 {
@@ -24,10 +26,13 @@ int main()
             1e-2,//one sparse recovery error probability
             -1,//k
             ll(1e5),//N
-            ll(1e9)//MAX
+            ll(1e4)//MAX
     );
 
+
     stop_timer("Running time: ");
+
+//    test_container();
 
     return 0;
 }

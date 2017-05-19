@@ -10,7 +10,7 @@
 
 struct RandomBase : BaseClass
 {
-    virtual void seed(Int seed)=0;
+    virtual void seed(int seed)=0;
 
     virtual Int getrandbits()=0;
 
