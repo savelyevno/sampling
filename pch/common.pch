@@ -46,9 +46,9 @@ typedef long long ll;
     #define Set boost::unordered_set
 //    #define Set unordered_set
 
+//    #define Map map
     #define Map boost::unordered_map
 //    #define Map unordered_map
-//    #define Map map
 
 //    namespace mp_hashing {
 //        namespace io = boost::iostreams;

@@ -14,13 +14,10 @@
 struct OneSparseRecoveryCormode : OneSparseRecoveryBase
 {
     Int p, z, iota, phi, tau;
+    Int row, column;
 
-    OneSparseRecoveryCormode(Int _p,
-                             Int _z)
+    OneSparseRecoveryCormode(Int _z, Int _p) : z(_z), p(_p)
     {
-        p = _p;
-        z = _z;
-
         phi = tau = iota = 0;
 
         inc_memory(sizeof(p) + sizeof(z) + sizeof(phi) + sizeof(tau) + sizeof(iota));

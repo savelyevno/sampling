@@ -152,6 +152,13 @@ struct L0SamplerCormodeModified : L0SamplerBase
         else
             k = _k;
 
+
+        level_hash = new Hash(_prime_getter, random, k, n, n);
+        for (int level = 0; level < levels; level++)
+            level_hash->create_hash_function();
+        inc_memory(level_hash->get_memory());
+
+
         sparse_recoverers = new SpRecClass*[levels];
         for (int level = 0; level < levels; level++)
             sparse_recoverers[level] = new SpRecClass(
@@ -162,11 +169,6 @@ struct L0SamplerCormodeModified : L0SamplerBase
                     sp_rec_delta,
                     _one_sp_rec_err_prob
             );
-
-        level_hash = new Hash(_prime_getter, random, k, n, n);
-        for (int level = 0; level < levels; level++)
-            level_hash->create_hash_function();
-        inc_memory(level_hash->get_memory());
 
         cnt_lvl.resize(size_t(levels));
     }

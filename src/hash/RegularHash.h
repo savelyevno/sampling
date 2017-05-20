@@ -12,7 +12,9 @@ struct RegularHash : HashBase
 {
     RegularHash(PrimeGetter* prime_getter, Random* _random, int _degree, Int _domain_size, Int _image_size);
 
-    Int create_hash_function();
+    int create_hash_function();
+
+    int create_hash_function(Random* _random);
 
     Int eval_hash_function(int id, Int arg);
 

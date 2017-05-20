@@ -10,7 +10,7 @@ RegularHash::RegularHash(PrimeGetter* prime_getter, Random* _random, int degree,
 
 }
 
-Int RegularHash::create_hash_function()
+int RegularHash::create_hash_function()
 {
     Int* new_coefficients = new Int[degree];
     for (int i = 0; i < degree; i++)
@@ -23,7 +23,7 @@ Int RegularHash::create_hash_function()
 
     inc_memory(degree * sizeof(Int));
 
-    return Int(coefficients.size()) - 1;
+    return int(coefficients.size()) - 1;
 }
 
 Int RegularHash::eval_hash_function(int id, Int arg)
@@ -40,4 +40,20 @@ Int RegularHash::eval_hash_function(int id, Int arg)
 Int *RegularHash::eval_hash_function_at_several_points(int id, Int *arg)
 {
     return nullptr;
+}
+
+int RegularHash::create_hash_function(Random *_random)
+{
+    Int* new_coefficients = new Int[degree];
+    for (int i = 0; i < degree; i++)
+        if (i == degree - 1)
+            new_coefficients[i] = _random->randint(1, field_order);
+        else
+            new_coefficients[i] = _random->randint(0, field_order);
+
+    coefficients.push_back(new_coefficients);
+
+    inc_memory(degree * sizeof(Int));
+
+    return int(coefficients.size()) - 1;
 }

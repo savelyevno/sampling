@@ -20,7 +20,9 @@ struct HashBase : BaseClass
 
     HashBase(PrimeGetter* prime_getter, Random* _random, int degree, Int _domain_size, Int _image_size);
 
-    virtual Int create_hash_function()=0;
+    virtual int create_hash_function()=0;
+
+    virtual int create_hash_function(Random* _random)=0;
 
     virtual Int eval_hash_function(int id, Int arg)=0;
 

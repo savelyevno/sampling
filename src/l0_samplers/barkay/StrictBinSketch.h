@@ -7,6 +7,7 @@
 
 #include "../base_classes/OneSparseRecoveryBase.h"
 
+
 struct StrictBinSketch : OneSparseRecoveryBase
 {
     Int X, Y, Z;
@@ -28,7 +29,7 @@ struct StrictBinSketch : OneSparseRecoveryBase
     pair <Int, Int> query()
     {
         if (X > 0 && Y > 0 && Z > 0 && X*Z == Y*Y)
-            return {Y/X, X};
+            return {Y/X - 1, X};
         return {-1, -1};
     };
 };
