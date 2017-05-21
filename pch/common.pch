@@ -20,6 +20,9 @@ using namespace std;
 
 typedef long long ll;
 
+#define MAXVAL 1073741824LL
+#define MAXLEN 1073741824LL
+
 #define BOOST
 
 #ifdef BOOST
@@ -33,12 +36,14 @@ typedef long long ll;
     #include <boost/iostreams/device/back_inserter.hpp>
     #include <boost/iostreams/stream_buffer.hpp>
     #include <boost/iostreams/stream.hpp>
-    #include <boost/multiprecision/float128.hpp>
-    #include <boost/integer/static_log2.hpp>
+    #include <boost/multiprecision/cpp_dec_float.hpp>
+    #include <boost/math/special_functions/log1p.hpp>
 
     typedef boost::multiprecision::int128_t Int;
     typedef boost::multiprecision::uint128_t uInt;
-    typedef boost::multiprecision::float128 Double;
+    typedef boost::multiprecision::cpp_dec_float_50 Double;
+
+    #define NUMLEN 128
 
     #define Vector vector
 
@@ -122,6 +127,8 @@ typedef long long ll;
     typedef ll Int;
     typedef unsigned long long uInt;
     typedef double Double;
+
+    #define NUMLEN 64
 
 //    #define Set set
     #define Set unordered_set

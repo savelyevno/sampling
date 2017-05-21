@@ -7,9 +7,10 @@
 
 #include "../src/l0_samplers/cormode/L0SamplerCormode.h"
 #include "../src/timer/Timer.h"
+#include "Tools.h"
 
 template <class SpRecClass>
-void test_sparse_recovery(Int n, Int s, double delta, int N, Int MAXVAL)
+void test_sparse_recovery(Int n, Int s, double delta, int N)
 {
     int seed = 1;
     Random* prime_getter_random = new Random(seed);
@@ -26,18 +27,12 @@ void test_sparse_recovery(Int n, Int s, double delta, int N, Int MAXVAL)
             1e-2
     );
 
-    Random* random = new Random(seed);
-    pair <Int, Int>* updates = new pair<Int, Int>[N];
-    set <Int> unique;
+
+    auto updates = get_updates(n, N, seed);
+    auto unique = get_unique(updates);
+
     for (int i = 0; i < N; i++)
-    {
-        updates[i].first = random->randint(0, n);
-        updates[i].second = random->randint(1, MAXVAL + 1);
-
-        unique.insert(updates[i].first);
-
         sp_rec->update(updates[i].first, updates[i].second);
-    }
 
     auto result = sp_rec->query();
 
@@ -52,24 +47,14 @@ void test_l0_sampler_recovery(
         double sp_rec_delta,
         double one_sp_rec_err_prob,
         int k,
-        int N,
-        Int MAXVAL)
+        int N)
 {
     int seed = 1;
     Random* prime_getter_random = new Random(seed);
     PrimeGetter* prime_getter = new PrimeGetter(prime_getter_random);
 
-    int gen_seed = 4;
-    Random* random = new Random(gen_seed);
-    pair <Int, Int>* updates = new pair<Int, Int>[N];
-    set <Int> unique;
-    for (int i = 0; i < N; i++)
-    {
-        updates[i].first = random->randint(0, n);
-        updates[i].second = random->randint(1, MAXVAL + 1);
-
-        unique.insert(updates[i].first);
-    }
+    auto updates = get_updates(n, N, seed);
+    auto unique = get_unique(updates);
 
     L0SamplerClass* l0_sampler = new L0SamplerClass(
             prime_getter,

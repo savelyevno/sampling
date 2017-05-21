@@ -29,13 +29,34 @@ int Log2(Int x)
 
     while (x > 0)
     {
-        x /= 2;
+        x >>= 1;
         result++;
     }
 
     return result;
 }
 
+int Log10(Int x)
+{
+    int result = 0;
+
+    while (x > 0)
+    {
+        x /= 10;
+        result++;
+    }
+
+    return result;
+}
+
+double LogE(double x)
+{
+    #ifdef BOOST
+        return boost::math::log1p(x - 1);
+    #else
+        return log(x);
+    #endif
+}
 
 #ifdef BOOST
 
@@ -50,3 +71,28 @@ size_t get_second_half(boost::multiprecision::int128_t x)
 }
 
 #endif
+
+int lsb(Int x, Int n)
+{
+    if (x == 0)
+        return Log2(n) + 1;
+
+    int result = 0;
+
+    while (x % 2 == 0)
+    {
+        x >>= 1;
+        result++;
+    }
+
+    return result;
+}
+
+int convert_to_int(Int x)
+{
+    #ifdef BOOST
+        return x.convert_to<int>();
+    #else
+        return x;
+    #endif
+}
