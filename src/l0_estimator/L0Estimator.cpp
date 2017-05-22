@@ -4,8 +4,9 @@
 
 #include "L0Estimator.h"
 
-L0Estimator::L0Estimator(PrimeGetter *prime_getter, Random *random, Int _n, double eps)
+L0Estimator::L0Estimator(PrimeGetter *prime_getter, Random *random, Int _n)
 {
+    double eps = 0.1;
     n = _n;
 
     rough_l0_estimator = new RoughL0Estimator(random, prime_getter, n);
@@ -48,7 +49,6 @@ void L0Estimator::update(Int index, Int value)
 Int L0Estimator::query()
 {
     Int R = rough_l0_estimator->query();
-//    Int R = 200;
     Int T = 0;
 
     int log_value = Log2(Int(16*double(R)/double(K)));
@@ -60,9 +60,10 @@ Int L0Estimator::query()
 
         T += tmp;
     }
-    cout << R << " " << K << " " << T << endl;
+    if (T == K)
+        T--;
 
-    double result = 32*double(R)/double(K) * LogE(double(1) - double(T)/double(K))/LogE(double(1) - double(1)/double(K));
+    double result = 1.67*32*double(R)/double(K) * LogE(double(1) - double(T)/double(K))/LogE(double(1) - double(1)/double(K));
     return Int(result);
 }
 

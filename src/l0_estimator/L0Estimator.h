@@ -17,7 +17,7 @@ struct L0Estimator : BaseClass
     Hash* hash3;
     Int* A, K, n;
 
-    L0Estimator(PrimeGetter* prime_getter, Random* random, Int _n, double eps);
+    L0Estimator(PrimeGetter* prime_getter, Random* random, Int _n);
 
     void update(Int index, Int value);
 

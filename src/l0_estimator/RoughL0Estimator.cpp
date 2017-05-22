@@ -33,11 +33,10 @@ RoughL0Estimator::RoughL0Estimator(Random* random, PrimeGetter* prime_getter, In
 
 void RoughL0Estimator::update(Int index, Int value)
 {
-    int lsb_value = lsb(level_hash->eval_hash_function(0, index) + 1, n);
-
+//    int lsb_value = lsb(level_hash->eval_hash_function(0, index) + 1, n);
 //    for (int level = 0; level <= lsb_value; level++)
 //        level_estimators[level]->update(index, value);
-    level_estimators[lsb_value]->update(index, value);
+    level_estimators[lsb(level_hash->eval_hash_function(0, index) + 1, n)]->update(index, value);
 }
 
 
@@ -53,7 +52,7 @@ Int RoughL0Estimator::query()
 //        cout << "+++++++++++++++++++++++++++" << endl;
 //    }
 
-    Int result = 1;
+    Int result = Int(1);
 
     for (int level = levels - 1; level >=0; level--)
         if (level_estimators[level]->query() > 8)
@@ -89,7 +88,7 @@ RoughL0EstimatorLevel::RoughL0EstimatorLevel(Hash* _hash, Random *random, PrimeG
         non_zero_buckets[i] = 0;
         inc_memory(sizeof(buckets[i]));
 
-        Int P = prime_getter->get_next_prime(p_arg_value + 2*log_p_arg_value - random->randint(0, 4*log_p_arg_value));
+        Int P = prime_getter->get_next_prime(p_arg_value + 2*log_p_arg_value - random->randint(Int(0), 4*log_p_arg_value));
         assert(P < (1 << 30));
 
         p[i] = convert_to_int(P);
@@ -119,7 +118,7 @@ void RoughL0EstimatorLevel::update(Int index, Int value)
 
 Int RoughL0EstimatorLevel::query()
 {
-    Int result = 0;
+    Int result = Int(0);
 
     for (int i = 0; i < eta; i++)
     {

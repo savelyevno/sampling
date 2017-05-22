@@ -34,4 +34,14 @@ struct StrictBinSketch : OneSparseRecoveryBase
     };
 };
 
+
+
+struct StrictBinSketchInitializer : OneSparseRecoveryInitialiserBase
+{
+    OneSparseRecoveryBase* init_one_sp_rec(int row, Int hash_value)
+    {
+        return new StrictBinSketch();
+    }
+};
+
 #endif //L0SAMPLER_BINSKETCH_H

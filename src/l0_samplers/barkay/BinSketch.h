@@ -35,8 +35,58 @@ struct BinSketch : OneSparseRecoveryBase
     {
         if (X > 0 && Y > 0 && Z > 0 && X*Z == Y*Y && X*hash_object->eval_hash_function(hash_f_id, Y/X) == T)
             return {Y/X - 1, X};
-        return {-1, -1};
+        return {Int(-1), Int(-1)};
     };
 };
+
+
+
+struct BinSketchInitialiser : OneSparseRecoveryInitialiserBase
+{
+    Hash* bin_sketch_hash;
+    Hash* seed_generator;
+    Int bin_sketch_hash_image_size, rows;
+    Random* random;
+
+    BinSketchInitialiser(Random *_random,
+                         PrimeGetter *_prime_getter,
+                         Int n,
+                         int t,
+                         double one_sp_rec_err_prob,
+                         Int _rows,
+                         Int columns
+    ) : rows(_rows)
+    {
+        bin_sketch_hash_image_size = Int(1/one_sp_rec_err_prob);
+
+        random = new Random();
+
+        bin_sketch_hash = new Hash(_prime_getter, random, t, n + 1, bin_sketch_hash_image_size);
+        inc_memory(bin_sketch_hash->get_memory());
+
+        seed_generator = new Hash(_prime_getter, _random, t, rows*columns, Int(1) << 30);
+        seed_generator->create_hash_function();
+        inc_memory(seed_generator->get_memory());
+
+
+        inc_memory(sizeof(bin_sketch_hash_image_size) + sizeof(rows) +
+                   sizeof(bin_sketch_hash) + sizeof(random) + sizeof(seed_generator));
+    }
+
+    OneSparseRecoveryBase* init_one_sp_rec(int row, Int hash_value)
+    {
+        int seed = convert_to_int(seed_generator->eval_hash_function(0, row*rows + hash_value));
+
+        memory_used -= bin_sketch_hash->get_memory();
+
+        random->seed(seed);
+        auto result = new BinSketch(bin_sketch_hash->create_hash_function(), bin_sketch_hash);
+
+        memory_used += bin_sketch_hash->get_memory();
+
+        return result;
+    }
+};
+
 
 #endif //L0SAMPLER_BINSKETCH_H

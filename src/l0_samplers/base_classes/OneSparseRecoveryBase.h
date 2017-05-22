@@ -15,5 +15,10 @@ struct OneSparseRecoveryBase : BaseClass
     virtual pair<Int, Int> query()=0;
 };
 
+struct OneSparseRecoveryInitialiserBase : BaseClass
+{
+    virtual OneSparseRecoveryBase* init_one_sp_rec(int row, Int column) = 0;
+};
+
 
 #endif //L0SAMPLER_ONESPARSERECOVERYBASE_H

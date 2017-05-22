@@ -43,7 +43,7 @@ void test_sparse_recovery(Int n, Int s, double delta, int N)
 template <class L0SamplerClass>
 void test_l0_sampler_recovery(
         Int n,
-        double delta,
+        int s,
         double sp_rec_delta,
         double one_sp_rec_err_prob,
         int k,
@@ -59,7 +59,7 @@ void test_l0_sampler_recovery(
     L0SamplerClass* l0_sampler = new L0SamplerClass(
             prime_getter,
             n,
-            delta,
+            s,
             sp_rec_delta,
             one_sp_rec_err_prob,
             k,

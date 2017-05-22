@@ -11,7 +11,6 @@
 
 int test_l0_estimator(Int n,
                        int N,
-                       double eps,
                        int seed=1,
                       bool report=true)
 {
@@ -24,13 +23,18 @@ int test_l0_estimator(Int n,
 
     Random* random = new Random(seed);
 
-    L0Estimator* l0_estimator = new L0Estimator(prime_getter, random, n, eps);
+    L0Estimator* l0_estimator = new L0Estimator(prime_getter, random, n);
 
     if (report)
         cout << "L0 estimator size: " << l0_estimator->get_memory()/1e6 << "MB" << endl;
 
-    start_timer();
-    for (int i = 0; i < N; i++)
+    if (report)
+        start_timer();
+    for (int i = 0; i < N/2; i++)
+        l0_estimator->update(updates[i].first, updates[i].second);
+    for (int i = 0; i < N/2; i++)
+        l0_estimator->update(updates[i].first, -updates[i].second);
+    for (int i = N/2; i < N; i++)
         l0_estimator->update(updates[i].first, updates[i].second);
     if (report)
     {
@@ -38,7 +42,8 @@ int test_l0_estimator(Int n,
         cout << "Correct size = " << unique.size() << endl;
     }
 
-    start_timer();
+    if (report)
+        start_timer();
     int result = convert_to_int(l0_estimator->query());
     if (report)
     {
@@ -82,7 +87,6 @@ void test_rough_l0_estimator(Int n,
 
 void test_multiple_l0_estimations(Int n,
                                   int N,
-                                  double eps,
                                   int rep,
                                   int seed=1)
 {
@@ -91,8 +95,8 @@ void test_multiple_l0_estimations(Int n,
     vector <int> results;
     for (int i = 0; i < rep; i++)
     {
-        int trial_seed = convert_to_int(random->randint(1, 100500));
-        results.push_back(test_l0_estimator(n, N, eps, trial_seed, false));
+        int trial_seed = convert_to_int(random->randint(Int(1), Int(100500)));
+        results.push_back(test_l0_estimator(n, N, trial_seed, false));
     }
     sort(results.begin(), results.end());
 
